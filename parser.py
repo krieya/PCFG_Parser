@@ -1,3 +1,33 @@
+import numpy as np
+from nltk.tree import Tree
+from nltk.grammar import Nonterminal
+from collections import defaultdict
+from nltk import CFG,PCFG
+
+def _create_parse_trees(current_node, current_parse, parse_pointers, sentence):
+
+    for pointers in parse_pointers[current_node]:
+        parse = Tree(str(current_node[2]), [])
+        for pointer in pointers:
+            if pointer[0] == pointer[1]:
+                parse.append(Tree(str(pointer[2]), [sentence[len(sentence) - 1 - pointer[0]]]))
+            else:
+                _create_parse_trees(pointer, parse, parse_pointers, sentence)
+            
+        current_parse.append(parse)
+            
+    return current_parse
+            
+            
+def create_parse_trees(parse_pointers, sentence, grammar):
+    '''
+    Return a list of possible parse trees for the sentence
+    '''
+    for lookup in parse_pointers:
+        if lookup == (len(sentence) - 1, 0, Nonterminal('S')):
+            return _create_parse_trees(lookup, [], parse_pointers, sentence)
+
+
 class PCYKParser(object):
     
     def __init__(self, grammar, trace = 0):
@@ -75,7 +105,6 @@ class PCYKParser(object):
         pcfg_grammar = self.grammar
         prob = np.ones(len(parses))
         prob_lookup = dict()
-        # your code here
         for pcfg_production in pcfg_grammar.productions():
             prob_lookup[str(pcfg_production).split("[")[0].strip()] = pcfg_production.prob()
         for i, parse in enumerate(parses):
