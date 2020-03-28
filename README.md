@@ -10,7 +10,7 @@ An end-to-end PCFG parser.
 
 ## Description
 
-This parser uses [CYK Parsing Algorithm](https://en.wikipedia.org/wiki/CYK_algorithm)for context-free grammars. It takes a raw senetence and grammars in the format of  [Probabilistic  Context-Free Grammars](https://en.wikipedia.org/wiki/Probabilistic_context-free_grammar) and returns the best parsing tree based on probabilities.
+This parser uses [CYK Parsing Algorithm](https://en.wikipedia.org/wiki/CYK_algorithm) for context-free grammars. It takes a raw senetence and grammars in the format of  [Probabilistic  Context-Free Grammars](https://en.wikipedia.org/wiki/Probabilistic_context-free_grammar) and returns the best parsing tree based on probabilities.
 
 ## Example
 
