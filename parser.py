@@ -8,7 +8,6 @@ from nltk import CFG,PCFG
 def create_table(sent_len):
     '''Create a table appropriate for CYK parsing. Returns a list of lists of empty lists'''
     
-    #your code here
     outer_l = []
     
     for i in range(sent_len):
@@ -18,7 +17,8 @@ def create_table(sent_len):
 
 
 def _create_parse_trees(current_node, current_parse, parse_pointers, sentence):
-
+    '''Helper function that does recursion to create parse trees'''
+    
     for pointers in parse_pointers[current_node]:
         parse = Tree(str(current_node[2]), [])
         for pointer in pointers:
@@ -53,7 +53,6 @@ class PCYKParser(object):
         self.grammar = grammar
         self.trace = trace
         self.parses = []
-        # your code here
         
         temp_grammar = CFG.binarize(self.grammar)
         self.grammar = CFG.remove_unitary_rules(temp_grammar)
